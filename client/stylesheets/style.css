@@ -1,0 +1,22 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+
+.container {
+  max-width: 400px;
+  background-color: #eeeeee;
+  border: 1px solid black;
+}
+
+.header {
+  text-align: center;
+}
+
+
+table, th, td {
+  border: 1px solid gray;
+  border-collapse: collapse;
+  padding: 2px;
+}

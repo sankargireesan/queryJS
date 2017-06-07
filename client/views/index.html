@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ng-app="queryJS">
+  <head>
+    <title>graphIt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="/stylesheets/style.css" media="screen">
+  </head>
+  <body ng-controller="mainController">
+    <div class="container">
+      <div class="header">
+        <h1>Query</h1>
+        <hr>
+      </div>
+      </div>
+      <br>
+
+    <h3>Cluster List</h3>
+    <table class="table-striped table-hover" style="width:100%" >
+      <tr>
+        <th >ClusterName</th>
+        <th>api_endpoint</th>
+        <th>Region</th>
+        <th>pod_capacity</th>
+        <th>pod_remaining</th>
+        <th>cpu_capacity</th>
+        <th>cpu_remaining</th>
+        <th>memory_capacity</th>
+        <th>memory_remaining</th>
+      </tr>
+      
+      <tr ng-repeat="cluster in clusterData " ng-click="getNodes(cluster.cluster)">
+        <td>{{ cluster.cluster }}</td>
+        <td>{{ cluster.api_endpoint }}</td>
+        <td>{{ cluster.region }}</td>
+        <td>{{ cluster.pod_capacity }}</td>
+        <td>{{ cluster.pod_remaining }}</td>
+        <td>{{ cluster.cpu_capacity }}</td>
+        <td>{{ cluster.cpu_remaining }}</td>
+        <td>{{ cluster.memory_capacity }}</td>
+        <td>{{ cluster.memory_remaining }}</td>
+      </tr>
+
+    </table>
+
+
+
+    <div ng-if="nodeData">
+      <h3>Node List</h3>
+      <table class="table-striped table-hover"  style="width:100%">
+        <tr>
+          <th>NodeName</th>
+          <th>Cluster</th>
+          <th>Region</th>
+          <th>pod_capacity</th>
+          <th>pod_remaining</th>
+          <th>cpu_capacity</th>
+          <th>cpu_remaining</th>
+          <th>memory_capacity</th>
+          <th>memory_remaining</th>
+        </tr>
+        <tr ng-repeat="cluster in nodeData " ng-click="getPod(cluster.nodename)">
+          <td>{{ cluster.nodename }}</td>
+          <td>{{ cluster.cluster_name }}</td>
+          <td>{{ cluster.region }}</td>
+          <td>{{ cluster.pods_capacity }}</td>
+          <td>{{ cluster.pods_remaining }}</td>
+          <td>{{ cluster.cpu_capacity }}</td>
+          <td>{{ cluster.cpu_remaining }}</td>
+          <td>{{ cluster.memory_capacity }}</td>
+          <td>{{ cluster.memory_remaining }}</td>
+        </tr>
+
+      </table>
+    </div>
+
+
+
+
+    <div ng-if="podData">
+      <h3>Pod List</h3>
+      <table class="table-striped table-hover"  style="width:100%">
+        <tr>
+          <th>PodName</th>
+          <th>Namespace</th>
+          <th>NodeName</th>
+          <th>Memory Used</th>
+          <th>CPU Used</th>
+        </tr>
+        <tr ng-repeat="cluster in podData ">
+          <td>{{ cluster.podname }}</td>
+          <td>{{ cluster.namespace }}</td>
+          <td>{{ cluster.nodename }}</td>
+          <td>{{ cluster.memory_used }}</td>
+          <td>{{ cluster.cpu_used }}</td>
+        </tr>
+
+      </table>
+    </div>
+
+
+
+    </div>
+    <script src="//code.jquery.com/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.min.js"></script>
+    <script src="javascripts/app.js"></script>
+  </body>
+</html>
