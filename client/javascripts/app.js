@@ -52,4 +52,32 @@ angular.module('queryJS', [])
     };
 
 
+    $scope.convertMemory = (m) => {
+      var memory = parseFloat(m);
+
+      memory = memory/(1024*1024*1024);
+
+      if(memory >= 1.0){
+        return memory.toString()+"Gi";
+      }
+      memory *=1024;
+
+      if(memory >= 1.0){
+        return memory.toString()+"Mi";
+      }
+      memory *=1024;
+
+      if(memory >= 1.0){
+        return memory.toString()+"Ki";
+      }
+      memory *=1024;
+
+      return memory;
+    };
+
+
+    $scope.b = function(){
+  return 4;
+};
+
 });

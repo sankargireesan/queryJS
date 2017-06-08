@@ -9,7 +9,7 @@
   <body ng-controller="mainController">
     <div class="container">
       <div class="header">
-        <h1>Query</h1>
+        <h1>Cluster Capacity</h1>
         <hr>
       </div>
       </div>
@@ -28,7 +28,6 @@
         <th>memory_capacity</th>
         <th>memory_remaining</th>
       </tr>
-      
       <tr ng-repeat="cluster in clusterData " ng-click="getNodes(cluster.cluster)">
         <td>{{ cluster.cluster }}</td>
         <td>{{ cluster.api_endpoint }}</td>
@@ -37,8 +36,8 @@
         <td>{{ cluster.pod_remaining }}</td>
         <td>{{ cluster.cpu_capacity }}</td>
         <td>{{ cluster.cpu_remaining }}</td>
-        <td>{{ cluster.memory_capacity }}</td>
-        <td>{{ cluster.memory_remaining }}</td>
+        <td>{{convertMemory(cluster.memory_capacity )}}</td>
+        <td>{{ convertMemory(cluster.memory_remaining) }}</td>
       </tr>
 
     </table>
@@ -59,22 +58,20 @@
           <th>memory_capacity</th>
           <th>memory_remaining</th>
         </tr>
-        <tr ng-repeat="cluster in nodeData " ng-click="getPod(cluster.nodename)">
-          <td>{{ cluster.nodename }}</td>
-          <td>{{ cluster.cluster_name }}</td>
-          <td>{{ cluster.region }}</td>
-          <td>{{ cluster.pods_capacity }}</td>
-          <td>{{ cluster.pods_remaining }}</td>
-          <td>{{ cluster.cpu_capacity }}</td>
-          <td>{{ cluster.cpu_remaining }}</td>
-          <td>{{ cluster.memory_capacity }}</td>
-          <td>{{ cluster.memory_remaining }}</td>
+        <tr ng-repeat="node in nodeData " ng-click="getPod(node.nodename)">
+          <td>{{ node.nodename }}</td>
+          <td>{{ node.cluster_name }}</td>
+          <td>{{ node.region }}</td>
+          <td>{{ node.pods_capacity }}</td>
+          <td>{{ node.pods_remaining }}</td>
+          <td>{{ node.cpu_capacity }}</td>
+          <td>{{ node.cpu_remaining }}</td>
+          <td>{{ convertMemory(node.memory_capacity) }}</td>
+          <td>{{ convertMemory(node.memory_remaining) }}</td>
         </tr>
 
       </table>
     </div>
-
-
 
 
     <div ng-if="podData">
@@ -87,12 +84,12 @@
           <th>Memory Used</th>
           <th>CPU Used</th>
         </tr>
-        <tr ng-repeat="cluster in podData ">
-          <td>{{ cluster.podname }}</td>
-          <td>{{ cluster.namespace }}</td>
-          <td>{{ cluster.nodename }}</td>
-          <td>{{ cluster.memory_used }}</td>
-          <td>{{ cluster.cpu_used }}</td>
+        <tr ng-repeat="pod in podData ">
+          <td>{{ pod.podname }}</td>
+          <td>{{ pod.namespace }}</td>
+          <td>{{ pod.nodename }}</td>
+          <td>{{ convertMemory(pod.memory_used) }}</td>
+          <td>{{ pod.cpu_used }}</td>
         </tr>
 
       </table>
